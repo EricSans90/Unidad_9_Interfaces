@@ -13,13 +13,24 @@ public class Futbolista implements Comparable{
 
     @Override
     public String toString() {
-        return "Futbolista : " + "Dni= " + dni + ", nombre= " + nombre + ", edad= " + edad + ", goles= " + goles +'.';
+        return "Futbolista: " + "Dni= " + dni + ", nombre= " + nombre + ", edad= " + edad + ", goles= " + goles +'.';
     }
 
     @Override
-    public int compareTo(Object o) {
-        int resultado;
-
-        return 0;
+    public boolean equals(Object otro){ // Compara this con otro
+        Futbolista otroFut = (Futbolista) otro; // cast
+        boolean iguales;
+        if (this.dni.equals(otroFut.dni)) {
+            iguales = true;
+        } else {
+            iguales = false;
+        }
+        return iguales;
     }
+
+    @Override
+    public int compareTo(Object otro){
+        return dni.compareTo(((Futbolista)otro).dni);
+    }
+
 }
