@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Futbolista implements Comparable{
     private String dni;
     private String nombre;
@@ -13,7 +15,7 @@ public class Futbolista implements Comparable{
 
     @Override
     public String toString() {
-        return "Futbolista: " + "Dni= " + dni + ", nombre= " + nombre + ", edad= " + edad + ", goles= " + goles +'.';
+        return "Futbolista: " + "Dni= " + dni + ", nombre= " + nombre + ", edad= " + edad + ", goles= " + goles +'.'+"\n";
     }
 
     @Override
@@ -33,4 +35,62 @@ public class Futbolista implements Comparable{
         return dni.compareTo(((Futbolista)otro).dni);
     }
 
+    public String getDni() {
+        return dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public int getGoles() {
+        return goles;
+    }
+
+    public static void main(String[] args) {
+        Futbolista[] futbolistas = new Futbolista[]{
+                //estadísticas de hace unos años
+                new Futbolista("12345678A", "Lionel Messi", 34, 785),
+                new Futbolista("23456789B", "Cristiano Ronaldo", 37, 700),
+                new Futbolista("34567890C", "Neymar Jr", 29, 170),
+                new Futbolista("45678901D", "Mohamed Salah", 29, 148),
+                new Futbolista("56789012E", "Kylian Mbappe", 23, 114),
+        };
+
+        //ordena por dni con el comparable
+        Arrays.sort(futbolistas);
+        System.out.println("Futbolistas ordenados por dni:");
+        System.out.println(Arrays.deepToString(futbolistas));
+        System.out.println();
+
+        //ordena por nombre con el comparator
+        Arrays.sort(futbolistas, new ComparadorNombre());
+        System.out.println("Futbolistas ordenados por nombre:");
+        System.out.println(Arrays.deepToString(futbolistas));
+        System.out.println();
+
+        //ordena por edad con el comparator
+        Arrays.sort(futbolistas, new ComparadorEdad());
+        System.out.println("Futbolistas ordenados por edad:");
+        System.out.println(Arrays.deepToString(futbolistas));
+        System.out.println();
+
+        //ordena por edad con el comparator
+        Arrays.sort(futbolistas, new ComparadorEdadNombre());
+        System.out.println("Futbolistas ordenados por edad y en caso de empate por nombre:");
+        System.out.println(Arrays.deepToString(futbolistas));
+        System.out.println();
+
+        // el ComparadorEdad ya parece ordenarlos por edad > nombre, voy a probar por edad y luego goles:
+        //ordena por edad con el comparator
+        Arrays.sort(futbolistas, new ComparadorEdadGoles());
+        System.out.println("Futbolistas ordenados por edad y en caso de empate por goles:");
+        System.out.println(Arrays.deepToString(futbolistas));
+        System.out.println();
+    }
 }
+
